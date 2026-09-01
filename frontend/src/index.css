@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
+@import "tailwindcss";
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+:root {
+  --bg-color: #0a0a0a;
+  --text-color: #e5e5e5;
+  --accent-red: #ff2a2a;
+  --border-color: #333333;
+}
+
+/* ===================== BRUTALIST BACKGROUND ===================== */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Chakra Petch', system-ui, sans-serif;
+}
+
+#root {
+  background-color: var(--bg-color);
+}
+
+.brutalist-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--bg-color);
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+}
+
+/* ===================== CROSSHAIRS ===================== */
+.crosshair {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
+.crosshair::before, .crosshair::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.4);
+}
+.crosshair::before { left: 9px; top: 0; width: 1px; height: 100%; }
+.crosshair::after { left: 0; top: 9px; width: 100%; height: 1px; }
+
+/* ===================== BRUTALIST PANELS ===================== */
+.brutalist-panel {
+  background: rgba(10, 10, 10, 0.90);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  border-radius: 0; /* Sharp corners */
+  box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.05); /* Hard shadow */
+}
+
+/* ===================== TEXT EFFECTS ===================== */
+.brutalist-heading {
+  font-family: 'Chakra Petch', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.brutalist-data {
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* ===================== ANIMATIONS ===================== */
+
+/* Glitch text effect on hover */
+@keyframes glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 2px) }
+  40% { transform: translate(-2px, -2px) }
+  60% { transform: translate(2px, 2px) }
+  80% { transform: translate(2px, -2px) }
+  100% { transform: translate(0) }
+}
+.hover-glitch:hover {
+  animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+  color: var(--accent-red);
+  text-shadow: 2px 0 0 rgba(45,212,232, 0.5), -2px 0 0 rgba(255, 42, 42, 0.5);
+}
+
+/* Flicker animation loop for destination */
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  33% { opacity: 0.3; }
+  36% { opacity: 1; }
+  39% { opacity: 0.3; }
+  42% { opacity: 1; }
+  88% { opacity: 1; }
+  90% { opacity: 0; }
+  92% { opacity: 1; }
+}
+.animate-flicker {
+  animation: flicker 5s infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee { animation: marquee 35s linear infinite; }
+
+/* Radar spin (kept for utility if needed) */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow { animation: spinSlow 12s linear infinite; }
